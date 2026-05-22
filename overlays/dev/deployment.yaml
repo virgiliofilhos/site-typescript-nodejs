@@ -17,8 +17,6 @@ spec:
       labels:
         app: ts-example-site
     spec:
-      imagePullSecrets:
-        - name: cred-dockerhub
       nodeSelector:
         workload: dev
       tolerations:
@@ -33,8 +31,9 @@ spec:
           effect: NoExecute
       containers:
         - name: site
-          image: virgiliofilhos/site-typescript-nodejs:latest
-          imagePullPolicy: Always
+          image: node:20-alpine
+          imagePullPolicy: IfNotPresent
+          command: ["node", "/app/server.js"]
           ports:
             - containerPort: 8080
               name: http
@@ -42,6 +41,11 @@ spec:
           env:
             - name: PORT
               value: "8080"
+          volumeMounts:
+            - name: app-script
+              mountPath: /app/server.js
+              subPath: server.js
+              readOnly: true
           startupProbe:
             httpGet:
               path: /healthz
@@ -69,3 +73,7 @@ spec:
             timeoutSeconds: 3
             successThreshold: 1
             failureThreshold: 3
+      volumes:
+        - name: app-script
+          configMap:
+            name: ts-example-site-app

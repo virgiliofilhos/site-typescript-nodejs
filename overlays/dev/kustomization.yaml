@@ -5,3 +5,9 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+configMapGenerator:
+  - name: ts-example-site-app
+    files:
+      - server.js=server.js
