@@ -1,0 +1,17 @@
+{
+  "name": "site-typescript-nodejs",
+  "version": "1.0.0",
+  "description": "Site exemplo simples em TypeScript e Node.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0",
+    "ts-node": "^10.9.2"
+  }
+}

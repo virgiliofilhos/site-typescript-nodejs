@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ts-example-site
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production-cialinux
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/compute-full-forwarded-for: "true"
+    nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - site-typescriptnodejs.a3v.me
+      secretName: site-typescriptnodejs-pro-tls
+  rules:
+    - host: site-typescriptnodejs.a3v.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ts-example-site
+                port:
+                  number: 80
