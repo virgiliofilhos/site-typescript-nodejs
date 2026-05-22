@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: ts-example-site
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging-cialinux
+    cert-manager.io/cluster-issuer: letsencrypt-staging
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/compute-full-forwarded-for: "true"
     nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
